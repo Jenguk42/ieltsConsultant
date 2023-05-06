@@ -1,6 +1,16 @@
 const apiKey = "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"
 const { Configuration, OpenAIApi } = require("openai");
 
+// Open server via Express
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello World")
+});
+
+app.listen(3000)
+
 // Import OpenAI
 const configuration = new Configuration({
   apiKey: apiKey,
