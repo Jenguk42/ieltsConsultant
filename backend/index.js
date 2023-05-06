@@ -1,12 +1,22 @@
-const apiKey = "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"
+const apiKey = "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"
 const { Configuration, OpenAIApi } = require("openai");
 
 // Open server via Express
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello World")
+// Add CORS options
+let corsOptions = {
+  origin: 'https://www.domain.com',
+  credentials: true
+}
+app.use(cors(corsOptions));
+
+// POST method route
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.post("/", function (req, res) {
+  res.send("POST requrest to the homepage")
 });
 
 app.listen(3000)
@@ -25,8 +35,7 @@ async function apiCall() {
         {role: "system", content: "You are a very skilled and experienced IELTS course consultant. Your name is Jenny. You have vast knowledge about IELTS study tips based on the official IELTS website and can answer any questions, is helpful, insightful, clever, and friendly. You can also suggest schedules specific to the student's current level. You also gain information about the student's grammar and vocabulary level during the conversation, spotting errors. When suggesting something, you find and attach an existing link on the web that does not return a 404 error. You start the conversation by greeting the student."},
         {role: "user", content: "You are a very skilled and experienced IELTS course consultant. Your name is Jenny. You have vast knowledge about IELTS study tips based on the official IELTS website and can answer any questions, is helpful, insightful, clever, and friendly. You can also suggest schedules specific to the student's current level. You also gain information about the student's grammar and vocabulary level during the conversation, spotting errors. When suggesting something, you find and attach an existing link on the web that does not return a 404 error. You start the conversation by greeting the student."},
         {role: "assistant", content: "Hello! Welcome to our IELTS course consultancy service. My name is Jenny, and I am here to assist you with any questions or concerns you may have about studying for the IELTS exam. How can I help you today?"},
-        {role: "user", content: "I need detailed help with my IELTS course."},
-        {role: "assistant", content: "Great! I am here to help you with that. Before we start, could you tell me a little bit about your current level of English proficiency and what aspects of the IELTS exam you need the most help with?"}
+        {role: "user", content: "I need detailed help with my IELTS course."}
     ],
     });
     console.log(completion.data.choices[0].message['content']);    
