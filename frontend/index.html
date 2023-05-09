@@ -6,36 +6,130 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>IELTS Consultant</title>
+	<style>
+		body {
+			background-color: #F5F5F5;
+			font-family: sans-serif;
+		}
+		
+		.container {
+			margin: 0 auto;
+			max-width: 800px;
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+		}
+		
+		.chat-box {
+			background-color: #FFFFFF;
+			box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+			border-radius: 10px;
+			padding: 20px;
+			margin-bottom: 20px;
+			overflow-y: scroll;
+			flex: 1;
+			flex-grow: 1; 
+		}
+		
+		.user-message {
+			background-color: #FFF2E5;
+			border-radius: 10px;
+			padding: 10px;
+			margin-bottom: 10px;
+			align-self: flex-end;
+		}
+		
+		.bot-message {
+			background-color: #E5F7FF;
+			border-radius: 10px;
+			padding: 10px;
+			margin-bottom: 10px;
+			align-self: flex-start;
+		}
+		
+		.text-input {
+			background-color: #FFFFFF;
+			border-radius: 10px;
+			padding: 10px;
+			border: none;
+			outline: none;
+			margin-top: 20px;
+			flex: none;
+		}
+		
+		.send-button {
+			background-color: #FFD900;
+			color: #FFFFFF;
+			border-radius: 10px;
+			padding: 10px 20px;
+			border: none;
+			outline: none;
+			margin-top: 10px;
+			align-self: flex-end;
+			cursor: pointer;
+			flex: none;
+		}
+	</style>
 </head>
 
 <body>
-	<h1></h1>
-	<button onclick="getConsult()">Consult!</button>
+	<div class="container">
+		<h1>IELTS Consultant</h1>
+		<div class="chat-box" id="chat-box"></div>
+		<input type="text" class="text-input" id="user-input" placeholder="Type your message here...">
+		<button class="send-button" onclick="sendMessage()">Send</button>
+	</div>
+
 	<script>
-		async function getConsult() {
-			try {
-				const url = 'http://localhost:3000/ieltsConsultant';
-				const data = { /* data goes here */ };
+		const chatBox = document.getElementById('chat-box');
+		const userInput = document.getElementById('user-input');
 
-				const response = await fetch(url, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify(data)
-				});
+		async function sendMessage() {
+  try {
+    const url = "http://localhost:3000/ieltsConsultant";
+    const data = {
+      userMessage: userInput.value,
+    };
 
-				const responseData = await response.json();
-				console.log(responseData);
-				return responseData;
-			} catch (error) {
-				console.error(error);
-			}
+    displayUserMessage(userInput.value); // Display the user's message
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const responseData = await response.json();
+    console.log(responseData);
+    displayBotMessage(responseData.message);
+  } catch (error) {
+    console.error(error);
+  }
+
+  // Clear the input field after sending message
+  userInput.value = "";
+}
+
+		function displayUserMessage(message) {
+			const userMessageElement = document.createElement('div');
+			userMessageElement.classList.add('user-message');
+			userMessageElement.innerText = message;
+
+			chatBox.appendChild(userMessageElement);
 		}
 
-		// // Use function
-		// const response = await getConsult();
-		// console.log(response);
+		function displayBotMessage(message) {
+			const botMessageElement = document.createElement('div');
+			botMessageElement.classList.add('bot-message');
+			botMessageElement.innerText = message;
+
+			chatBox.appendChild(botMessageElement);
+		}
+
+		// Display a welcome message when the page loads
+		displayBotMessage("Welcome! How can I assist you with your IELTS preparation today?");
 	</script>
 </body>
 
