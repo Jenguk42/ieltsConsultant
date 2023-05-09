@@ -22,7 +22,7 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 // POST method route
-app.get("/ieltsConsultant", async function (req, res) {
+app.post("/ieltsConsultant", async function (req, res) {
   // Call ChatGPT
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
@@ -38,7 +38,7 @@ app.get("/ieltsConsultant", async function (req, res) {
 
   let answer = completion.data.choices[0].message['content'];
   console.log(answer);
-  res.send(answer);
+  res.json({"assistant": answer});
 });
 
 app.listen(3000)

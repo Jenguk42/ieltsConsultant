@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IELTS Consultant</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>IELTS Consultant</title>
 </head>
+
 <body>
-    <h1></h1>
-    <script>
-        fetch('http://localhost:3000/ieltsConsultant', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-    </script>
+	<h1></h1>
+	<button onclick="getConsult()">Consult!</button>
+	<script>
+		async function getConsult() {
+			try {
+				const url = 'http://localhost:3000/ieltsConsultant';
+				const data = { /* data goes here */ };
+
+				const response = await fetch(url, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				});
+
+				const responseData = await response.json();
+				console.log(responseData);
+				return responseData;
+			} catch (error) {
+				console.error(error);
+			}
+		}
+
+		// // Use function
+		// const response = await getConsult();
+		// console.log(response);
+	</script>
 </body>
+
 </html>
