@@ -1,11 +1,10 @@
-// const apiKey = "";
 require('dotenv').config();
-const { Configuration, OpenAIApi } = require("openai");
 const express = require("express");
 var cors = require('cors');
 const app = express();
 
 // Import OpenAI
+const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
   apiKey: process.env.API_KEY,
 });
