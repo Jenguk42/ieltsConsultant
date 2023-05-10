@@ -1,6 +1,9 @@
 const chatBox = document.getElementById('chat-box');
 const userInput = document.getElementById('user-input');
 
+let userMessages = [];
+let botMessages = [];
+
 async function sendMessage() {
     try {
 
@@ -12,7 +15,9 @@ async function sendMessage() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                message: userInput.value
+                // message: userInput.value,
+                userMessages: userMessages,
+                botMessages: botMessages
             }),
         });
 
@@ -34,6 +39,7 @@ function displayUserMessage(message) {
     userMessageElement.innerText = message;
 
     chatBox.appendChild(userMessageElement);
+    userMessages.push(message);
 }
 
 function displayBotMessage(message) {
@@ -42,6 +48,7 @@ function displayBotMessage(message) {
     botMessageElement.innerText = message;
 
     chatBox.appendChild(botMessageElement);
+    botMessages.push(message);
 }
 
 // Display a welcome message when the page loads
