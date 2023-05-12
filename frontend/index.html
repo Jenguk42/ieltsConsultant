@@ -11,11 +11,13 @@
 
 <body>
 	<div class="intro-container">
-		<h1>Instant IELTS Consultant</h1>consultation just for you!</h1>
-		<img src="http://placehold.it/">
+		<h1>Instant IELTS consultation just for you!</h1>
+		<img src="logo.png" alt="IELTSLogo">
 				
-		<label for="experience">Have you taken an IELTS test before?</label>
-		<input type="checkbox" id="experience">
+		<div class="label-experience">
+			<label for="experience">Have you taken an IELTS test before?</label>
+			<input type="checkbox" id="experience">
+		</div>
 
 		<label for="elaboration">Please write down anything you want us to take into concern.</label>
 		<input type="text" id="elaboration">
@@ -76,7 +78,7 @@
 		</div>
 
 	</div>
-	<div class="chat-container">
+	<div class="chat-container" style="display: none;">
 		<div class="header">
 			<h1>IELTS Consultant</h1>
 			<button class="mode-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
