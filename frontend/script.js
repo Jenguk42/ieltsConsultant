@@ -7,15 +7,18 @@ let botMessages = [];
 async function sendMessage(hasTakenTest, listeningBand, readingBand, writingBand, speakingBand, elaboration) {
     try {
 
-        displayUserMessage(userInput.value); // Display the user's message
+        // Check if the user has entered a message
+        if (userInput.value) {
+            displayUserMessage(userInput.value); // Display the user's message
+        }
 
+        // Send the user's message to the server
         const response = await fetch("http://localhost:3000/ieltsConsultant", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                // message: userInput.value,
                 hasTakenTest: hasTakenTest,
                 listeningBand: listeningBand,
                 readingBand: readingBand,
@@ -29,6 +32,7 @@ async function sendMessage(hasTakenTest, listeningBand, readingBand, writingBand
 
         console.log(userInput.value);
         const responseData = await response.json();
+        console.log(responseData)
         console.log(responseData.assistant);
         displayBotMessage(responseData.assistant);
     } catch (error) {
@@ -39,6 +43,7 @@ async function sendMessage(hasTakenTest, listeningBand, readingBand, writingBand
     userInput.value = "";
 }
 
+// Display the user's message in the chat box
 function displayUserMessage(message) {
     const userMessageElement = document.createElement('div');
     userMessageElement.classList.add('user-message');
@@ -48,6 +53,7 @@ function displayUserMessage(message) {
     userMessages.push(message);
 }
 
+// Display the bot's message in the chat box
 function displayBotMessage(message) {
     const botMessageElement = document.createElement('div');
     botMessageElement.classList.add('bot-message');
@@ -57,8 +63,6 @@ function displayBotMessage(message) {
     botMessages.push(message);
 }
 
-// Display a welcome message when the page loads
-displayBotMessage("Welcome! How can I assist you with your IELTS preparation today?");
 
 // Take info from the user and start the chat
 function startChat() {
