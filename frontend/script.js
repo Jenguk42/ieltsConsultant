@@ -54,6 +54,17 @@ function displayBotMessage(message) {
 // Display a welcome message when the page loads
 displayBotMessage("Welcome! How can I assist you with your IELTS preparation today?");
 
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
+function startChat() {
+    document.body.classList.toggle('show-chat')
 }
+
+// Show select container if the user has taken an IELTS test before
+const experienceCheckbox = document.getElementById('experience');
+const selectContainer = document.querySelector('.select-container');
+experienceCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    selectContainer.style.display = 'block';
+  } else {
+    selectContainer.style.display = 'none';
+  }
+});

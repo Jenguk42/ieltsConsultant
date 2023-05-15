@@ -5,11 +5,6 @@ body {
     transition: all 0.3s ease-out;
 }
 
-body.dark-mode {
-    background-color: #222222;
-    color: #F5F5F5;
-}
-
 .intro-container {
     display: flex;
     flex-wrap: wrap;
@@ -110,7 +105,7 @@ body.dark-mode {
     flex: none;
 }
 
-.mode-button {
+.button {
     color: #FFFFFF;
     background-color: #222222;
     border: none;
@@ -121,9 +116,4 @@ body.dark-mode {
     align-self: flex-end;
     cursor: pointer;
     flex: none;
-}
-
-.mode-button.dark-mode {
-    color: #222222;
-    background-color: #F5F5F5;
 }

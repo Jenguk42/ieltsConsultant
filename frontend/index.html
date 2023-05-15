@@ -19,10 +19,7 @@
 			<input type="checkbox" id="experience">
 		</div>
 
-		<label for="elaboration">Please write down anything you want us to take into concern.</label>
-		<input type="text" id="elaboration">
-
-		<div class="select-container">
+		<div class="select-container" style="display: none;">
 			<label for="bandListening">Listening Band:</label>
 			<select name="bandListening" id="bandListening">
 			  <option value="9">9</option>
@@ -77,11 +74,15 @@
 			</select>
 		</div>
 
+		<label for="elaboration">Please write down anything you want us to take into concern.</label>
+		<input type="text" id="elaboration">
+
+		<button class="button" onclick="startChat()">Get Consultation!</button>
+
 	</div>
 	<div class="chat-container" style="display: none;">
 		<div class="header">
 			<h1>IELTS Consultant</h1>
-			<button class="mode-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
 		</div>
 		<div class="chat-box" id="chat-box"></div>
 		<input type="text" class="text-input" id="user-input" placeholder="Type your message here...">
