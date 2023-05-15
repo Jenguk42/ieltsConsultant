@@ -54,16 +54,61 @@ function displayBotMessage(message) {
 // Display a welcome message when the page loads
 displayBotMessage("Welcome! How can I assist you with your IELTS preparation today?");
 
+// Take info from the user and start the chat
 function startChat() {
-    document.body.classList.toggle('show-chat')
-}
+    // Get the values of the input fields and select options
+    const hasTakenTest = document.getElementById('experience').checked;
+    const listeningBand = document.getElementById('bandListening').value;
+    const readingBand = document.getElementById('bandReading').value;
+    const writingBand = document.getElementById('bandWriting').value;
+    const speakingBand = document.getElementById('bandSpeaking').value;
+    const elaboration = document.getElementById('elaboration').value;
+
+    // Hide the intro container and show the chat container
+    document.querySelector('.intro-container').style.display = 'none'; 
+    document.querySelector('.chat-container').style.display = 'flex';
+
+    // Display the response from the server in the chat box
+    const chatBox = document.getElementById('chat-box');
+    chatBox.innerHTML = response.message;
+  
+    // Create an AJAX request to send this data to the server
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:3000/ieltsConsultant');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+  
+        // Hide the intro container and show the chat container
+        const introContainer = document.querySelector('.intro-container');
+        const chatContainer = document.querySelector('.chat-container');
+        introContainer.style.display = 'none'; 
+        chatContainer.style.display = 'flex';
+  
+        // Display the response from the server in the chat box
+        const chatBox = document.getElementById('chat-box');
+        chatBox.innerHTML = response.message;
+      }
+    };
+    const data = JSON.stringify({
+      hasTakenTest,
+      listeningBand,
+      readingBand,
+      writingBand,
+      speakingBand,
+      elaboration,
+    });
+    xhr.send(data);
+  }
+  
 
 // Show select container if the user has taken an IELTS test before
 const experienceCheckbox = document.getElementById('experience');
 const selectContainer = document.querySelector('.select-container');
 experienceCheckbox.addEventListener('change', function() {
   if (this.checked) {
-    selectContainer.style.display = 'block';
+    selectContainer.style.display = 'flex';
   } else {
     selectContainer.style.display = 'none';
   }
