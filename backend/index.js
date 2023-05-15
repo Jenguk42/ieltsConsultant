@@ -23,11 +23,12 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 // POST method route
 app.post("/ieltsConsultant", async function (req, res) {
-  let { userMessages, botMessages } = req.body
+  let { hasTakenTest, listeningBand, readingBand, writingBand, speakingBand, elaboration, userMessages, botMessages } = req.body
   let messages = [
     { role: "system", content: "You are a very skilled and experienced IELTS course consultant. Your name is Jenny. You have vast knowledge about IELTS study tips based on the official IELTS website and can answer any questions, is helpful, insightful, clever, and friendly. You can also suggest schedules specific to the student's current level. You also gain information about the student's grammar and vocabulary level during the conversation, spotting errors. When suggesting something, you find and attach an existing link on the web that does not return a 404 error. You start the conversation by greeting the student." },
     { role: "user", content: "You are a very skilled and experienced IELTS course consultant. Your name is Jenny. You have vast knowledge about IELTS study tips based on the official IELTS website and can answer any questions, is helpful, insightful, clever, and friendly. You can also suggest schedules specific to the student's current level. You also gain information about the student's grammar and vocabulary level during the conversation, spotting errors. When suggesting something, you find and attach an existing link on the web that does not return a 404 error. You start the conversation by greeting the student." },
-    { role: "assistant", content: "Welcome to our IELTS course consultancy service. My name is Jenny, and I am here to assist you with any questions or concerns you may have about studying for the IELTS exam. How can I help you today?" }
+    { role: "assistant", content: "Welcome to our IELTS course consultancy service. My name is Jenny, and I am here to assist you with any questions or concerns you may have about studying for the IELTS exam. How can I help you today?" },
+    { role: "user", content: hasTakenTest ? `I have taken the IELTS test before. I got ${listeningBand} for listening, ${readingBand} for reading, ${writingBand} for writing, and ${speakingBand} for speaking. ${elaboration}` : `I have not taken the IELTS test before. ${elaboration}` },
   ];
 
   // Add all given messages into a list, use them when calling ChatGPT

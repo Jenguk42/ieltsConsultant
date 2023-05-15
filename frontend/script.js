@@ -4,7 +4,7 @@ const userInput = document.getElementById('user-input');
 let userMessages = [];
 let botMessages = [];
 
-async function sendMessage() {
+async function sendMessage(hasTakenTest, listeningBand, readingBand, writingBand, speakingBand, elaboration) {
     try {
 
         displayUserMessage(userInput.value); // Display the user's message
@@ -16,6 +16,12 @@ async function sendMessage() {
             },
             body: JSON.stringify({
                 // message: userInput.value,
+                hasTakenTest: hasTakenTest,
+                listeningBand: listeningBand,
+                readingBand: readingBand,
+                writingBand: writingBand,
+                speakingBand: speakingBand,
+                elaboration: elaboration,
                 userMessages: userMessages,
                 botMessages: botMessages
             }),
@@ -68,38 +74,11 @@ function startChat() {
     document.querySelector('.intro-container').style.display = 'none'; 
     document.querySelector('.chat-container').style.display = 'flex';
 
-    // Display the response from the server in the chat box
-    const chatBox = document.getElementById('chat-box');
-    chatBox.innerHTML = response.message;
+    // // Display the response from the server in the chat box
+    // const chatBox = document.getElementById('chat-box');
+    // chatBox.innerHTML = response.message;
   
-    // Create an AJAX request to send this data to the server
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:3000/ieltsConsultant');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-  
-        // Hide the intro container and show the chat container
-        const introContainer = document.querySelector('.intro-container');
-        const chatContainer = document.querySelector('.chat-container');
-        introContainer.style.display = 'none'; 
-        chatContainer.style.display = 'flex';
-  
-        // Display the response from the server in the chat box
-        const chatBox = document.getElementById('chat-box');
-        chatBox.innerHTML = response.message;
-      }
-    };
-    const data = JSON.stringify({
-      hasTakenTest,
-      listeningBand,
-      readingBand,
-      writingBand,
-      speakingBand,
-      elaboration,
-    });
-    xhr.send(data);
+    sendMessage(hasTakenTest, listeningBand, readingBand, writingBand, speakingBand, elaboration)
   }
   
 
