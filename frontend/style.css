@@ -149,6 +149,6 @@ body {
 }   
 
 .spinner {
-    font-size: 25px;
-    align-items: center;
+    display: flex;
+    justify-content: center;
 }

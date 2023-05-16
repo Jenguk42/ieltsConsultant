@@ -17,7 +17,7 @@ async function sendMessage(hasTakenTest, listeningBand, readingBand, writingBand
 
         // Add loading spinner while waiting for response
         const loadingElement = document.createElement('div');
-        loadingElement.innerHTML = '<div class="spinner"><i class="fa fa-spinner fa-spin"></i></div>';
+        loadingElement.innerHTML = '<div class="spinner"><i class="fa fa-spinner fa-spin" style="font-size:30px;"></i></div>';
         chatBox.appendChild(loadingElement);
 
         // Send the user's message to the server

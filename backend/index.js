@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { Configuration, OpenAIApi } = require("openai");
-const express = require("express");
+// const serverless = require("serverless-http");
+const express = require('express');
 var cors = require('cors');
 const app = express();
 
@@ -12,9 +13,10 @@ const openai = new OpenAIApi(configuration);
 
 // Add CORS 
 // let corsOptions = {
-//   origin: 'https://www.domain.com',
+//   origin: 'https://ieltsconsultant-front.pages.dev/',
 //   credentials: true
 // }
+// app.use(cors(corsOptions));
 app.use(cors());
 
 // Allow POST method
@@ -54,7 +56,7 @@ app.post("/ieltsConsultant", async function (req, res) {
   // Call ChatGPT
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    max_tokens: 100,
+    max_tokens: 2000,
     temperature: 0.8,
     messages: messages
   });
@@ -64,4 +66,6 @@ app.post("/ieltsConsultant", async function (req, res) {
   res.json({ "assistant": answer });
 });
 
+// Listen to port 3000
 app.listen(3000)
+// module.exports.handler = serverless(app);
