@@ -6,14 +6,18 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>IELTS Consultant</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 	<div class="intro-container">
-		<h1>Instant IELTS consultation just for you!</h1>
-		<img src="logo.png" alt="IELTSLogo">
-				
+		<div class="title">
+			<h1>IELTS Consultant</h1>
+			<div>Instant IELTS consultation just for you!</div>
+			<img src="logo.png" alt="IELTSLogo">
+		</div>
+
 		<div class="label-experience">
 			<label for="experience">Have you taken an IELTS test before?</label>
 			<input type="checkbox" id="experience">
@@ -48,16 +52,16 @@
 			</select>
 			<label for="bandWriting">Writing Band:</label>
 			<select name="bandWriting" id="bandWriting">
-			  <option value="noScore">Not Sure</option>
-			  <option value="9">9</option>
-			  <option value="8">8</option>
-			  <option value="7">7</option>
-			  <option value="6">6</option>
-			  <option value="5">5</option>
-			  <option value="4">4</option>
-			  <option value="3">3</option>
-			  <option value="2">2</option>
-			  <option value="1">1</option>
+				<option value="noScore">Not Sure</option>
+				<option value="9">9</option>
+				<option value="8">8</option>
+				<option value="7">7</option>
+				<option value="6">6</option>
+				<option value="5">5</option>
+				<option value="4">4</option>
+				<option value="3">3</option>
+				<option value="2">2</option>
+				<option value="1">1</option>
 			</select>
 			<label for="bandSpeaking">Speaking Band:</label>
 			<select name="bandSpeaking" id="bandSpeaking">
@@ -71,7 +75,7 @@
 				<option value="3">3</option>
 				<option value="2">2</option>
 				<option value="1">1</option>
-			  </select>
+			</select>
 		</div>
 
 		<label for="elaboration">Please write down anything you want us to take into concern.</label>
@@ -85,8 +89,10 @@
 			<h1>IELTS Consultant</h1>
 		</div>
 		<div class="chat-box" id="chat-box"></div>
-		<input type="text" class="text-input" id="user-input" placeholder="Type your message here...">
-		<button class="send-button" onclick="sendMessage()">Send</button>
+		<div class="chat-input">
+			<input type="text" class="text-input" id="user-input" placeholder="Type your message here...">
+			<button class="send-button" onclick="sendMessage()">Send</button>
+		</div>
 	</div>
 
 	<script src="script.js"></script>

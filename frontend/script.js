@@ -12,6 +12,14 @@ async function sendMessage(hasTakenTest, listeningBand, readingBand, writingBand
             displayUserMessage(userInput.value); // Display the user's message
         }
 
+        // Clear the input field after sending message
+        userInput.value = "";
+
+        // Add loading spinner while waiting for response
+        const loadingElement = document.createElement('div');
+        loadingElement.innerHTML = '<div class="spinner"><i class="fa fa-spinner fa-spin"></i></div>';
+        chatBox.appendChild(loadingElement);
+
         // Send the user's message to the server
         const response = await fetch("http://localhost:3000/ieltsConsultant", {
             method: "POST",
@@ -31,16 +39,19 @@ async function sendMessage(hasTakenTest, listeningBand, readingBand, writingBand
         });
 
         console.log(userInput.value);
+
+        // Remove the loading spinner
+        loadingElement.remove();
+
+        // Get the response from the server and display it in the chat box
         const responseData = await response.json();
         console.log(responseData)
         console.log(responseData.assistant);
         displayBotMessage(responseData.assistant);
+
     } catch (error) {
         console.error(error);
     }
-
-    // Clear the input field after sending message
-    userInput.value = "";
 }
 
 // Display the user's message in the chat box
@@ -77,10 +88,6 @@ function startChat() {
     // Hide the intro container and show the chat container
     document.querySelector('.intro-container').style.display = 'none'; 
     document.querySelector('.chat-container').style.display = 'flex';
-
-    // // Display the response from the server in the chat box
-    // const chatBox = document.getElementById('chat-box');
-    // chatBox.innerHTML = response.message;
   
     sendMessage(hasTakenTest, listeningBand, readingBand, writingBand, speakingBand, elaboration)
   }
